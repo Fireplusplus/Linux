@@ -1,0 +1,1 @@
+gcc tcp.c -o tcp.exe -lws2_32
