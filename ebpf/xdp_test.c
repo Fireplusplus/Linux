@@ -43,7 +43,7 @@ int test(struct xdp_md *ctx) {
             return XDP_DROP;
         }
 
-        if (tcp->dest == ntohs(6666)) {
+        if (tcp->dest == htons(6666)) {
             bpf_trace_printk("drop tcp dst port 6666\n");
             return XDP_DROP;
         }
