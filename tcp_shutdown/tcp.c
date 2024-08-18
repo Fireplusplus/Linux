@@ -31,11 +31,8 @@ void server_process(int sock)
         }
 
         buf[ret] = 0;
-        int i = 0;
-        for (; i < 3; i++) {
-            size_t ret_s = send(sock, buf, ret, 0);
-            printf("resp:%s %d/%d\n", buf, ret_s, ret);
-        }
+        size_t ret_s = send(sock, buf, ret, 0);
+        printf("resp:%s %d/%d\n", buf, ret_s, ret);
     }
 }
 
