@@ -33,6 +33,7 @@ void server_process(int sock)
         buf[ret] = 0;
         size_t ret_s = send(sock, buf, ret, 0);
         printf("resp:%s %d/%d\n", buf, ret_s, ret);
+        sleep(100);
     }
 }
 
@@ -107,9 +108,9 @@ int do_client()
             break;
         }
 
-        //if (shutdown(sock, SHUT_RD) < 0) {
-        //    printf("shutdown failed: %s\n", strerror(errno));
-        //} 
+        if (shutdown(sock, SHUT_WR) < 0) {
+            printf("shutdown failed: %s\n", strerror(errno));
+        } 
 
         ssize_t ret = recv(sock, buf, sizeof(buf), 0);
         if (ret == 0) {
@@ -126,7 +127,7 @@ int do_client()
 
         buf[ret] = 0;
         printf("resp:%s %d/%d\n", buf, ret, n);
-        sleep(1);
+        sleep(100);
     }
 
     return 0;
