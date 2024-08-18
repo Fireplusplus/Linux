@@ -107,27 +107,26 @@ int do_client()
             break;
         }
 
-        if (shutdown(sock, SHUT_RD) < 0) {
-            printf("shutdown failed: %s\n", strerror(errno));
-        } 
+        //if (shutdown(sock, SHUT_RD) < 0) {
+        //    printf("shutdown failed: %s\n", strerror(errno));
+        //} 
 
-        /*ssize_t ret = recv(sock, buf, sizeof(buf), 0);
+        ssize_t ret = recv(sock, buf, sizeof(buf), 0);
+        if (ret == 0) {
+            printf("read end!\n");
+            break;
+        }
         if (ret < 0) {
             if (errno != EAGAIN) {
                 printf("client recv failed: %s\n", strerror(errno));
                 break;
             }
-            sleep(1);
             continue;
-        }*/
-        sleep(1);
-        continue;
+        }
 
-        // close(sock);
-        //buf[ret] = 0;
-        //printf("resp:%s %d/%d\n", buf, ret, n);
-        sleep(30);
-        break;
+        buf[ret] = 0;
+        printf("resp:%s %d/%d\n", buf, ret, n);
+        sleep(1);
     }
 
     return 0;
