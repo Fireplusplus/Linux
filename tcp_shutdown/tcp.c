@@ -108,11 +108,11 @@ int do_client()
             break;
         }
 
-        if (shutdown(sock, SHUT_WR) < 0) {
+        if (shutdown(sock, SHUT_RD) < 0) {
             printf("shutdown failed: %s\n", strerror(errno));
         } 
 
-        ssize_t ret = recv(sock, buf, sizeof(buf), 0);
+        /*ssize_t ret = recv(sock, buf, sizeof(buf), 0);
         if (ret == 0) {
             printf("read end!\n");
             break;
@@ -126,7 +126,7 @@ int do_client()
         }
 
         buf[ret] = 0;
-        printf("resp:%s %d/%d\n", buf, ret, n);
+        printf("resp:%s %d/%d\n", buf, ret, n);*/
         sleep(100);
     }
 
